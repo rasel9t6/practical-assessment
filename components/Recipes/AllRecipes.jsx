@@ -1,27 +1,15 @@
-import Modal from '@/components/Modal';
-import RecipeCard from '@/components/Recipes/RecipeCard';
-import SingleRecipe from '@/components/Recipes/SingleRecipe';
-import SearchForm from '@/components/SearchForm';
-import React from 'react';
+import Modal from '../Modal';
+import SearchForm from '../SearchForm';
+import RecipeCard from './RecipeCard';
+import SingleRecipe from './SingleRecipe';
 
-const AllRecipes = async ({ searchParams }) => {
-  const query = (await searchParams)?.query;
-  console.log(query);
-  let response;
-  if (query) {
-    response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_BASE_URL
-      }/api/recipes/searchRecipesByName?query=${encodeURIComponent(query)}`
-    );
-  } else {
-    response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/recipes/getAllRecipes`
-    );
-  }
+export default async function AllRecipes() {
 
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/recipes/getAllRecipes`
+  );
   const allRecipes = await response.json();
-
+  const recipeId = allRecipes.map((recipe) => recipe.idMeal);
   console.log(allRecipes);
 
   return (
@@ -40,6 +28,7 @@ const AllRecipes = async ({ searchParams }) => {
                   <RecipeCard
                     key={recipe?.idMeal}
                     recipe={recipe}
+                    
                   />
                 ))
               ) : (
@@ -51,17 +40,9 @@ const AllRecipes = async ({ searchParams }) => {
       </div>
 
       {/* Modal*/}
-      <Modal>{/* <SingleRecipe id={recipeId} /> */}</Modal>
+      <Modal>
+        <SingleRecipe id={recipeId} />
+      </Modal>
     </div>
   );
-};
-
-export default AllRecipes;
-
-{
-  /* <div className='bg-gray-50 min-h-screen flex items-center'>
-      <div className='container mx-auto'>
-        <AllRecipe />
-      </div>
-    </div> */
 }

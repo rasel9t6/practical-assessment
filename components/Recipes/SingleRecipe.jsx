@@ -1,13 +1,14 @@
+"use client";
 import HttpKit from "@/common/helpers/HttpKit";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import React from "react";
 
 const SingleRecipe = ({ id, setIsOpen }) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["recipe-details"],
-    queryFn: () => HttpKit.getRecipeDetails(id),
-  });
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["recipe-details"],
+  //   queryFn: () => HttpKit.getRecipeDetails(id),
+  // });
 
   if (!isLoading) return "Loading...";
   return (

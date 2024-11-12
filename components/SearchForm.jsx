@@ -1,36 +1,34 @@
 'use client';
+import { useRouter } from 'next/navigation';
+import SearchFormReset from './SearchFormReset';
+import { useState } from 'react';
 
-import debounce from '@/lib/utils';
-import { useCallback } from 'react';
+export default function SearchForm({ query }) {
+  const router = useRouter();
+  const [searchInput, setSearchInput] = useState(query || '');
 
-export default function Search() {
-  const [searchInput, setSearchInput] = useState('');
-  const [recipes, setRecipes] = useState([]);
-  const handleSearch = async () => {
-    if (!searchInput) return;
-    const results = await searchRecipesByName(searchInput);
-    setRecipes(results);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push(`/all-recipes?query=${encodeURIComponent(searchInput)}`);
   };
-  const debouncedSearch = useCallback(debounce(handleSearch, 300), [
-    searchInput,
-  ]);
-  const handleInputChange = (e) => {
-    setSearchInput(e.target.value);
-    debouncedSearch();
-  };
+
   return (
-    <form className='w-full mt-12'>
+    <form
+      onSubmit={handleSubmit}
+      className='search-form w-full mt-12'
+    >
       <div className='relative flex p-1 rounded-full bg-white border border-yellow-200 shadow-md md:p-2'>
         <input
+          name='query'
           placeholder='Your favorite food'
           className='w-full p-4 rounded-full outline-none bg-transparent'
-          type='text'
           value={searchInput}
-          onChange={handleInputChange}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
+        {searchInput && <SearchFormReset />}
         <button
-          type='button'
-          title='Start buying'
+          type='submit'
+          title='Search recipes'
           className='ml-auto py-3 px-6 rounded-full text-center transition bg-gradient-to-b from-yellow-200 to-yellow-300 hover:to-red-300 active:from-yellow-400 focus:from-red-400 md:px-12'
         >
           <span className='hidden text-yellow-900 font-semibold md:block'>
