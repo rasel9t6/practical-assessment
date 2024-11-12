@@ -1,29 +1,30 @@
 'use client';
-import HttpKit from '@/common/helpers/HttpKit';
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import RecipeCard from './RecipeCard';
-import Modal from '../Modal';
-import SingleRecipe from './SingleRecipe';
 
-const RecipesList = () => {
+import { useQuery } from '@tanstack/react-query';
+import Modal from '../Modal';
+import RecipeCard from './RecipeCard';
+import SingleRecipe from './SingleRecipe';
+import { useEffect, useState } from 'react';
+import HttpKit from '@/common/helpers/HttpKit';
+
+export default function AllRecipe() {
   const [openDetails, setOpenDetails] = useState(false);
   const [recipeId, setRecipeId] = useState('');
   const [recipes, setRecipes] = useState([]);
   const [searchInput, setSearchInput] = useState('abc');
   const [searchQuery, setSearchQuery] = useState(null);
-
   const { data, isLoading, error } = useQuery({
     queryKey: ['recipes'],
-    queryFn: HttpKit.getTopRecipes,
+    queryFn: HttpKit.getAllRecipes,
   });
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       setRecipes(data);
     }
   }, [data]);
-
+  console.log(recipes);
   const handleSearch = () => {
     setSearchQuery(searchInput);
   };
@@ -35,11 +36,10 @@ const RecipesList = () => {
 
   if (isLoading) return <div>Loading recipes...</div>;
   if (error) return <div>Error loading recipes: {error.message}</div>;
-
   return (
     <div className='bg-gray-50 py-10'>
-      <div className='container mx-auto'>
-        <h1 className='text-2xl font-bold'>Top Recipes</h1>
+      <div className='container mx-auto mt-20'>
+        <h1 className='text-2xl font-bold'>All Recipes</h1>
         {/* Search form */}
         <div>
           <form
@@ -106,6 +106,4 @@ const RecipesList = () => {
       </Modal>
     </div>
   );
-};
-
-export default RecipesList;
+}
