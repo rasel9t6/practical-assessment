@@ -1,25 +1,33 @@
-"use client";
-import HttpKit from "@/common/helpers/HttpKit";
-import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import CloseButton from '../CloseButton';
 
 const SingleRecipe = ({ id, setIsOpen }) => {
-  // const { data, isLoading, error } = useQuery({
-  //   queryKey: ["recipe-details"],
-  //   queryFn: () => HttpKit.getRecipeDetails(id),
-  // });
+ async function name(params) {
+   const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/recipes/getRecipeDetails?id=${id}`
+  );
+   const data = await res.json();
+   return data
+ }
 
-  if (!isLoading) return "Loading...";
+ 
+
+  if (!data) return 'Loading...';
+
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex justify-end">
-        <button onClick={() => setIsOpen(false)}>Close</button>
+    <div className='flex flex-col gap-5'>
+      <div className='flex justify-end'>
+        <CloseButton onClick={() => setIsOpen(false)} />
       </div>
       <div>
-        <Image src={data?.strMealThumb} width={500} height={500} alt="Image" />
+        <Image
+          src={data.strMealThumb}
+          width={500}
+          height={500}
+          alt={data.strMeal || 'Recipe Image'}
+        />
       </div>
-      <h2 className="text2xl font-semibold">{data?.strMeal}</h2>
+      <h2 className='text-2xl font-semibold'>{data.strMeal}</h2>
     </div>
   );
 };

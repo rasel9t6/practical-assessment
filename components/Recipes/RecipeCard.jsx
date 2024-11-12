@@ -1,18 +1,16 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
 
 const RecipeCard = ({ recipe, handleDetailsOpen }) => {
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   return (
     <div
-      onClick={() => setIsDetailsOpen(recipe?.idMeal)}
+      onClick={() => handleDetailsOpen(recipe?.idMeal)}
       className='group space-y-6 border border-gray-100  rounded-3xl bg-white  px-4 py-4 text-center shadow hover:cursor-pointer hover:shadow-xl transition duration-200 shadow-gray-600/10'
     >
       <Image
         className='mx-auto rounded-2xl'
         src={recipe?.strMealThumb}
-        alt='Web Development'
+        alt={recipe?.strMeal || 'Recipe'}
         loading='lazy'
         width={500}
         height={500}

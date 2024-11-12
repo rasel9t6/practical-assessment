@@ -1,11 +1,8 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment} from "react";
 import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/react";
-import SingleRecipe from "./Recipes/SingleRecipe";
 
-const Modal = ({children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  
+const Modal = ({ isOpen, setIsOpen, children }) => {
   return (
     <Transition
       show={isOpen}
@@ -14,7 +11,7 @@ const Modal = ({children }) => {
       <Dialog
         as='div'
         className='relative z-100'
-        onClose={(open) => setIsOpen(!open)}
+        onClose={() => setIsOpen(false)}
       >
         <TransitionChild
           as={Fragment}
@@ -29,7 +26,6 @@ const Modal = ({children }) => {
         </TransitionChild>
 
         <div className='fixed inset-0 z-10 overflow-y-auto'>
-          {console.log(children)}
           <div
             onClick={(e) => e.stopPropagation()}
             className='flex items-center justify-center min-h-full p-4 text-center sm:items-center sm:p-0'
@@ -44,7 +40,7 @@ const Modal = ({children }) => {
               leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
             >
               <DialogPanel className='w-full px-4 py-4 mx-4 text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-lg sm:p-6'>
-                <SingleRecipe />
+                {children}
               </DialogPanel>
             </TransitionChild>
           </div>
