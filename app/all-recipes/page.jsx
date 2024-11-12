@@ -31,7 +31,7 @@ const AllRecipes = async ({ searchParams }) => {
           {query ? `Search results for "${query}"` : 'All Recipes'}
         </h1>
 
-        <SearchForm query={query} />
+        <SearchForm query={query} all_recipes={true} />
         <div className='relative py-16'>
           <div className='container relative m-auto px-6 text-gray-500 md:px-12'>
             <div className='grid gap-6 md:mx-auto md:w-8/12 lg:w-full lg:grid-cols-3'>

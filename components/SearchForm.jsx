@@ -1,17 +1,20 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import SearchFormReset from './SearchFormReset';
 import { useState } from 'react';
 
-export default function SearchForm({ query }) {
+export default function SearchForm({ query, all_recipes }) {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState(query || '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    router.push(`/all-recipes?query=${encodeURIComponent(searchInput)}`);
+    const searchPath = all_recipes
+      ? `/all-recipes?query=${encodeURIComponent(searchInput)}`
+      : `?query=${encodeURIComponent(searchInput)}`;
+    console.log(searchPath);
+    router.push(searchPath);
+    setSearchInput('');
   };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -25,7 +28,6 @@ export default function SearchForm({ query }) {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        {searchInput && <SearchFormReset />}
         <button
           type='submit'
           title='Search recipes'
@@ -40,7 +42,7 @@ export default function SearchForm({ query }) {
             fill='currentColor'
             viewBox='0 0 16 16'
           >
-            <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
+            <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1z' />
           </svg>
         </button>
       </div>
