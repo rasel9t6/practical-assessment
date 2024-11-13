@@ -1,34 +1,60 @@
 # Recipe App
 
-# Description:
+## Description
 
-- You are provided with an incomplete Recipe App project that uses the free MealDB API to retrieve recipe data. The app needs to showcase some recipes and allows users to add them to a cart. Functionalities after carting is not required for the current MVP. The home page includes a banner section, a top recipes section, and a search option to find recipes by name or ingredients.
+This is a Recipe App that integrates with the free MealDB API to fetch recipe data. The app allows users to explore various recipes, add them to a cart, and provides a basic authentication system. Users can also view all recipes and search for recipes by name.
 
-# Required New Features:
+### Features:
+- **Banner Section:** The home page features a hero section with a call-to-action button.
+- **Top Recipes Section:** Displays top recipes fetched from the MealDB API.
+- **Search Functionality:** Users can search for recipes by name.
+- **All Recipes Page:** A dedicated page to display all available recipes.
+- **Add to Cart:** Users can add recipes to a cart, which is saved locally if not logged in and to the user's account if logged in.
+- **Basic Authentication:** Implemented login and signup flow using name, email, phone, and password.
+- **Mobile Responsiveness:** The app is fully responsive on mobile devices.
 
-- Basic Authentication: Implement an authentication flow using name, email, phone, and a password.
-- All Recipes Page: Create a page where users can view all recipes.
-- Add Recipe to Cart: Allow users to add recipes to a cart. The cart should store data locally if the user is not logged in, and save it to the user’s account if they are logged in.
-- Bug Fixes: There are at least three, or more features that are currently not working properly. Identify and fix these bugs.
+## Features Implemented
 
-# Additional Requirements:
+### 1. **API Integration:**
+   - Converted the entire HTTP API kit into Next.js API routes for seamless server-side integration.
 
-- Consistent Design Style: Ensure that any new features match the design style of the existing application. Follow basic accessibility standards.
-- Mobile Responsiveness: Make all pages responsive for mobile devices.
+### 2. **Add to Cart Functionality:**
+   - Implemented the ability for users to add recipes to a cart.
+   - Cart data is stored locally if the user is not logged in, and to the user's account if logged in.
 
-# Documentation Requirements:
+### 3. **Authentication:**
+   - Implemented a basic authentication system with user data (name, email, phone, password) being preserved in local storage.
+   
+### 4. **All Recipes Page:**
+   - Created a new page to display all available recipes from the API.
 
-- After completion, document under the README section.
-- Features Implemented: Describe the new features you added, in both technical and non-technical terms.
-- Bug Fixes: Briefly list the bugs you identified and fixed.
-- Time Estimate: Indicate the total time spent on the assessment.
+### 5. **Bug Fixes:**
+   - Fixed the **unique map key error** in the recipe list.
+   - Resolved issues with the **modal close function** not working properly.
+   - Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
+   - Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
+   - Addressed **Next.js config images.remotePatterns warning**.
 
-# N.B. Documentation should be brief and short, no need to go overboard with it.
+### 6. **Design and Accessibility Improvements:**
+   - Designed a **Hero Section Banner** with a call-to-action button.
+   - Improved accessibility by ensuring proper **aria attributes** and accessible design elements.
 
-# Submission Guidelines:
+### 7. **Configuration:**
+   - Added an **.env** file to securely store sensitive data and prevent exposure.
 
-- Clone or ZIP Download the existing GitHub Code repository: https://github.com/khalek-repliq/frontend-assessment
-- Get rid of the .git folder from the project.
-- Make your necessary changes and upload your new project into your personal GitHub account as a public repository
-- Host your final version on Vercel, Netlify, Firebase or similar platform and prepare your live link.
-- You must submit your "GitHub Link" & "Live Link"
+## Bug Fixes
+
+- Fixed **unique map key error** in the recipe list.
+- Resolved **modal close function** issue.
+- Resolved **Toggle Navbar** issue.
+- Fixed **deprecated tags** in the modal component.
+- Corrected **images.remotePatterns** warning in Next.js config.
+
+## Time Estimate
+
+- Total time spent on this assessment: **25+ hours** (adjust based on actual time).
+
+---
+
+Thank you for reviewing my work!
+
