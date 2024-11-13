@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -9,10 +10,10 @@ export async function GET(request) {
       params: { i: id },
     });
     const meal = response.data.meals ? response.data.meals[0] : null;
-    return new Response(JSON.stringify(meal), { status: 200 });
+    return NextResponse(JSON.stringify(meal), { status: 200 });
   } catch (error) {
     console.error('Error fetching recipe details:', error);
-    return new Response(
+    return NextResponse(
       JSON.stringify({ error: 'Failed to fetch recipe details' }),
       { status: 500 }
     );

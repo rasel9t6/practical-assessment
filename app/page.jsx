@@ -10,13 +10,11 @@ export default async function Home({ searchParams }) {
   let response;
   if (query) {
     response = await fetch(
-      `${
-        process.env.NEXT_PUBLIC_API_BASE_URL
-      }/api/recipes/searchRecipesByName?query=${encodeURIComponent(query)}`
+      `/api/recipes/searchRecipesByName?query=${encodeURIComponent(query)}`
     );
   } else {
     response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/recipes/getTopRecipes`
+      `/api/recipes/getTopRecipes`
     );
   }
   const topRecipes = await response.json();
