@@ -46,6 +46,7 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 
 - Fixed **unique map key error** in the recipe list.
 - Resolved **modal close function** issue.
+- Prevent **add to cart** adding same recipe more than once. same recipe can not add multiple time in Cart.
 - Resolved **Toggle Navbar** issue.
 - Fixed **deprecated tags** in the modal component.
 - Corrected **images.remotePatterns** warning in Next.js config.
