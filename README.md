@@ -5,6 +5,7 @@
 This is a Recipe App that integrates with the free MealDB API to fetch recipe data. The app allows users to explore various recipes, add them to a cart, and provides a basic authentication system. Users can also view all recipes and search for recipes by name.
 
 ### Features:
+
 - **Banner Section:** The home page features a hero section with a call-to-action button.
 - **Top Recipes Section:** Displays top recipes fetched from the MealDB API.
 - **Search Functionality:** Users can search for recipes by name.
@@ -16,31 +17,42 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 ## Features Implemented
 
 ### 1. **API Integration:**
-   - Converted the entire HTTP API kit into Next.js API routes for seamless server-side integration.
+
+- Converted the entire HTTP API kit into Next.js API routes for seamless server-side integration.
 
 ### 2. **Add to Cart Functionality:**
-   - Implemented the ability for users to add recipes to a cart.
-   - Cart data is stored locally if the user is not logged in, and to the user's account if logged in.
+
+- Implemented the ability for users to add recipes to a cart.
+- Cart data is stored locally if the user is not logged in, and to the user's account if logged in.
 
 ### 3. **Authentication:**
-   - Implemented a basic authentication system with user data (name, email, phone, password) being preserved in local storage.
-   
+
+- Implemented a basic authentication system with user data (name, email, phone, password) being preserved in local storage.
+
 ### 4. **All Recipes Page:**
-   - Created a new page to display all available recipes from the API.
+
+- Created a new page to display all available recipes from the API.
 
 ### 5. **Bug Fixes:**
-   - Fixed the **unique map key error** in the recipe list.
-   - Resolved issues with the **modal close function** not working properly.
-   - Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
-   - Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
-   - Addressed **Next.js config images.remotePatterns warning**.
+
+- Fixed the **unique map key error** in the recipe list.
+- Resolved issues with the **modal close function** not working properly.
+- Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
+- Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
+- Addressed **Next.js config images.remotePatterns warning**.
 
 ### 6. **Design and Accessibility Improvements:**
-   - Designed a **Hero Section Banner** with a call-to-action button.
-   - Improved accessibility by ensuring proper **aria attributes** and accessible design elements.
+
+- Designed a **Hero Section Banner** with a call-to-action button.
+- Improved accessibility by ensuring proper **aria attributes** and accessible design elements.
 
 ### 7. **Configuration:**
-   - Added an **.env** file to securely store sensitive data and prevent exposure.
+
+- Added an **.env** file to securely store sensitive data and prevent exposure.
+
+### 8. **Notification**
+
+- Added an **React hot toast** for notify user interaction.
 
 ## Bug Fixes
 
@@ -58,4 +70,3 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 ---
 
 Thank you for reviewing my work!
-
