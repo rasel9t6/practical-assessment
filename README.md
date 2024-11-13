@@ -48,7 +48,12 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 
 ### 7. **Configuration:**
 
-- Added an **.env** file to securely store sensitive data and prevent exposure.
+- Added an `.env` file to securely store sensitive data and prevent exposure.
+- Please In the `.env` file, add the following configurations:
+
+```plaintext
+BASE_URL = 'https://www.themealdb.com/api/json/v1/1'
+NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000"
 
 ### 8. **Notification**
 
