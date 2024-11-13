@@ -20,7 +20,12 @@ export default async function Home({searchParams}) {
   return (
     <div>
       <Hero />
-      <RecipesList topRecipes={topRecipes} query={ query} />
+      <RecipesList
+        recipes={topRecipes}
+        query={query}
+        all_recipes={false}
+        heading='Top Recipes'
+      />
     </div>
   );
 }
