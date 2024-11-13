@@ -4,7 +4,6 @@ import { useState } from 'react';
 import InputField from './InputField';
 import Link from 'next/link';
 import { getUser } from '@/utils/auth-user';
-import { revalidatePath } from 'next/cache';
 
 export default function LoginForm() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -29,10 +28,10 @@ export default function LoginForm() {
       const user = await getUser(email, password);
       if (user) {
         localStorage.setItem('users', JSON.stringify(user));
-        router.push('/');
 
         setCredentials({ email: '', password: '' });
         setError('');
+        router.refresh();
       } else {
         setError('Invalid email or password');
       }

@@ -1,11 +1,12 @@
-import React from "react";
+import CartList from '@/components/CartList';
+import SingleRecipe from '@/components/Recipes/SingleRecipe';
+import React from 'react';
 
 const Cart = () => {
   return (
-    <div className="bg-gray-50 min-h-screen flex items-center">
-      <div className="container mx-auto">
-        {/* Cart page */}
-        <h1 className="text-4xl">This is the cart page</h1>
+    <div className='bg-gray-50 py-10'>
+      <div className='container mx-auto mt-20'>
+        <CartList />
       </div>
     </div>
   );

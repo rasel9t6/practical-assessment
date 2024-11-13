@@ -1,18 +1,26 @@
 'use client';
-import { getUsersFromLocalStorage } from '@/utils/auth-user';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+
 import React, { useEffect, useState, useRef } from 'react';
 
 const Navbar = () => {
   const [user, setUser] = useState(null); 
   const toggleNavRef = useRef(null);
-  const router = useRouter();
 
-  useEffect(() => {
-    const storedUser = getUsersFromLocalStorage();
-    setUser(storedUser); 
-  }, []);
+
+useEffect(() => {
+  const getUser = () => {
+    const usersData = localStorage.getItem('users');
+    if (usersData) {
+      return JSON.parse(usersData); 
+    }
+    return null; 
+  };
+
+  const storedUser = getUser();
+  setUser(storedUser); 
+
+}, []);
 
   const handleLogout = () => {
     localStorage.removeItem('users');

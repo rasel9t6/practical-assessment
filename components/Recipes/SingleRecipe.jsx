@@ -2,22 +2,37 @@ import { X } from 'lucide-react';
 import Image from 'next/image';
 
 const SingleRecipe = ({ data, onClose }) => {
-  const handleAddToCart = () => {
-    const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+const handleAddToCart = () => {
+  const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  const isItemInCart = currentCart.some((item) => item.idMeal === data.idMeal);
+
+  if (!isItemInCart) {
     const updatedCart = [...currentCart, data];
-
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+  } else {
+    console.log('This item is already in the cart');
+  }
 
-    const user = JSON.parse(localStorage.getItem('users'));
-    console.log(user)
-    if (user) {
-      const userCart = user.cart || [];
+  const user = JSON.parse(localStorage.getItem('users'));
+  if (user) {
+    const userCart = user.cart || [];
+
+    const isUserItemInCart = userCart.some(
+      (item) => item.idMeal === data.idMeal
+    );
+
+    
+    if (!isUserItemInCart) {
       user.cart = [...userCart, data];
-
       localStorage.setItem('users', JSON.stringify(user));
+    } else {
+      console.log('This item is already in your cart');
     }
-    onClose(false);
-  };
+  }
+
+  onClose(false);
+};
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex justify-end'>
