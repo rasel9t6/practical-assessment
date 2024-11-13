@@ -1,10 +1,9 @@
 import RecipesList from '@/components/Recipes/RecipesList';
-import SearchForm from '@/components/SearchForm';
 import React from 'react';
 
 const AllRecipes = async ({ searchParams }) => {
   const query = (await searchParams)?.query;
-  console.log(query);
+
   let response;
   if (query) {
     response = await fetch(

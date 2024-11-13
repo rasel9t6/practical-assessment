@@ -7,38 +7,43 @@ import { getUser } from '@/utils/auth-user';
 
 export default function LoginForm() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const [user, setUser] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setCredentials((prev) => ({ ...prev, [name]: value }));
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = credentials;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const { email, password } = credentials;
 
-    if (!email || !password) {
-      setError('Both email and password are required');
-      return;
+  if (!email || !password) {
+    setError('Both email and password are required');
+    return;
+  }
+
+  try {
+    const user = await getUser(email, password);
+    if (user) {
+      
+      localStorage.setItem('users', JSON.stringify(user));
+
+      setCredentials({ email: '', password: '' });
+      setError('');
+      setUser(user); 
+
+      
+      router.push('/'); 
+    } else {
+      setError('Invalid email or password');
     }
-
-    try {
-      const user = await getUser(email, password);
-      if (user) {
-        localStorage.setItem('users', JSON.stringify(user));
-
-        setCredentials({ email: '', password: '' });
-        setError('');
-        router.refresh();
-      } else {
-        setError('Invalid email or password');
-      }
-    } catch (err) {
-      setError(err.message || 'An error occurred');
-    }
-  };
+  } catch (err) {
+    setError(err.message || 'An error occurred');
+  }
+};
   return (
     <form
       className='text-yellow-900 space-y-6'

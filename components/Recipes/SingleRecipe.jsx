@@ -1,38 +1,29 @@
+import {
+  getUsersFromLocalStorage,
+  saveUsersToLocalStorage,
+} from '@/utils/auth-user';
 import { X } from 'lucide-react';
 import Image from 'next/image';
 
 const SingleRecipe = ({ data, onClose }) => {
-const handleAddToCart = () => {
-  const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const handleAddToCart = () => {
+    const currentUser = getUsersFromLocalStorage();
+    const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (currentUser) {
+      const userCart = currentUser.cart || [];
 
-  const isItemInCart = currentCart.some((item) => item.idMeal === data.idMeal);
-
-  if (!isItemInCart) {
-    const updatedCart = [...currentCart, data];
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-  } else {
-    console.log('This item is already in the cart');
-  }
-
-  const user = JSON.parse(localStorage.getItem('users'));
-  if (user) {
-    const userCart = user.cart || [];
-
-    const isUserItemInCart = userCart.some(
-      (item) => item.idMeal === data.idMeal
-    );
-
-    
-    if (!isUserItemInCart) {
-      user.cart = [...userCart, data];
-      localStorage.setItem('users', JSON.stringify(user));
+      if (!userCart.some((item) => item.idMeal === data.idMeal)) {
+        currentUser.cart = [...userCart, data];
+        saveUsersToLocalStorage(currentUser);
+      }
     } else {
-      console.log('This item is already in your cart');
+      if (!currentCart.some((item) => item.idMeal === data.idMeal)) {
+        localStorage.setItem('cart', JSON.stringify([...currentCart, data]));
+      }
     }
-  }
 
-  onClose(false);
-};
+    onClose(false);
+  };
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex justify-end'>

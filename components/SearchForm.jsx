@@ -11,7 +11,6 @@ export default function SearchForm({ query, all_recipes }) {
     const searchPath = all_recipes
       ? `/all-recipes?query=${encodeURIComponent(searchInput)}`
       : `?query=${encodeURIComponent(searchInput)}`;
-    console.log(searchPath);
     router.push(searchPath);
     setSearchInput('');
   };

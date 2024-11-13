@@ -3,7 +3,7 @@ import RecipesList from '../components/Recipes/RecipesList';
 
 export default async function Home({searchParams}) {
   const query = (await searchParams)?.query;
-  console.log(query)
+
   let response;
   if (query) {
     response = await fetch(
