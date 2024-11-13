@@ -7,7 +7,7 @@ export async function GET() {
     return NextResponse.json(response.data.meals || []);
   } catch (error) {
     console.error('Error fetching all recipes:', error);
-    return new NextResponse.json(
+    return NextResponse.json(
       { error: 'Failed to fetch recipes' },
       { status: 500 }
     );
