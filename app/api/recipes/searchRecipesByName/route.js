@@ -11,10 +11,10 @@ export async function GET(request) {
       params: { s: query },
     });
     const meals = response.data.meals || [];
-    return  NextResponse(JSON.stringify(meals), { status: 200 });
+    return new NextResponse(JSON.stringify(meals), { status: 200 });
   } catch (error) {
     console.error('Error fetching recipes by name:', error);
-    return NextResponse(
+    return new NextResponse(
       JSON.stringify({ error: 'Failed to fetch recipes by name' }),
       { status: 500 }
     );

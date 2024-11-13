@@ -14,7 +14,7 @@ const AllRecipes = async ({ searchParams }) => {
     );
   } else {
     response = await fetch(
-      `/api/recipes/getAllRecipes`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/recipes/getAllRecipes`
     );
   }
 
