@@ -7,20 +7,20 @@ export const saveUsersToLocalStorage = (users) => {
 };
 
 export const getUser = async (email, password) => {
-  const users = getUsersFromLocalStorage();
-  const user = users.find(
-    (user) => user.email === email && user.password === password
-  );
+  const users = getUsersFromLocalStorage(); 
 
-  if (user) {
+  if (users.email === email && users.password === password) {
     const localCart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (localCart.length > 0) {
-      user.cart = [...new Set([...user.cart, ...localCart])];
-      localStorage.setItem('users', JSON.stringify(users));
+      users.cart = [...new Set([...users.cart, ...localCart])];
+      saveUsersToLocalStorage(users); 
       localStorage.removeItem('cart');
     }
-    return user || null;
+
+    return users; 
+  } else {
+    return null;
   }
 };
 

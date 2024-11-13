@@ -4,21 +4,35 @@ import {
 } from '@/utils/auth-user';
 import { X } from 'lucide-react';
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 const SingleRecipe = ({ data, onClose }) => {
   const handleAddToCart = () => {
-    const currentUser = getUsersFromLocalStorage();
+    const currentUser = getUsersFromLocalStorage(); 
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
-    if (currentUser) {
-      const userCart = currentUser.cart || [];
 
-      if (!userCart.some((item) => item.idMeal === data.idMeal)) {
-        currentUser.cart = [...userCart, data];
-        saveUsersToLocalStorage(currentUser);
-      }
+    if (currentUser && currentUser.cart) {
+      const userCart = currentUser.cart || [];
+      const mergedCart = [
+        ...userCart,
+        ...currentCart.filter((item) =>
+          userCart.every((userItem) => userItem.idMeal !== item.idMeal)
+        ),
+      ];
+   if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
+     mergedCart.push(data);
+   }
+      currentUser.cart = mergedCart;
+      saveUsersToLocalStorage(currentUser);
+
+      // Clear the guest cart after merging
+      localStorage.removeItem('cart');
+      toast.success('Recipe added to your account cart');
     } else {
+      // User not logged in; only work with the guest cart in localStorage
       if (!currentCart.some((item) => item.idMeal === data.idMeal)) {
         localStorage.setItem('cart', JSON.stringify([...currentCart, data]));
+        toast.success('Recipe added to guest cart');
       }
     }
 

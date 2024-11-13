@@ -5,6 +5,7 @@ import SingleRecipe from './SingleRecipe';
 import SearchForm from '../SearchForm';
 import { useState } from 'react';
 
+
 const RecipesList = ({ recipes, query, all_recipes, heading }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
@@ -51,6 +52,7 @@ const RecipesList = ({ recipes, query, all_recipes, heading }) => {
               )}
             </Modal>
           </div>
+          
         </div>
       </div>
     </div>

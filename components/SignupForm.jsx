@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import InputField from './InputField';
 import Link from 'next/link';
 import { createUser, getUser } from '@/utils/auth-user';
+import toast from 'react-hot-toast';
 
 export default function SignupForm() {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ export default function SignupForm() {
     phone: '',
     email: '',
     password: '',
-    cart: [], // Initialize cart here as part of formData
+    cart: [],
   });
   const [error, setError] = useState('');
   const router = useRouter();
@@ -28,17 +29,18 @@ export default function SignupForm() {
     try {
       const userExists = await getUser(email, password);
       if (userExists) {
+        toast.error('User with this email already exists.');
         setError('User with this email already exists.');
         return;
       }
 
       await createUser({ name, phone, email, password, cart });
 
-   
       localStorage.setItem('users', JSON.stringify(formData));
-
+      toast.success('Sign up completed! Please log now...');
       router.push('/login');
     } catch (err) {
+      toast.error('An error occurred');
       setError(err.message || 'An error occurred');
     }
   };

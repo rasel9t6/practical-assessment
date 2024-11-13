@@ -1,7 +1,10 @@
+import React, { Suspense } from 'react';
 import Hero from '../components/Hero/Hero';
-import RecipesList from '../components/Recipes/RecipesList';
-
-export default async function Home({searchParams}) {
+import Skeleton from '@/components/Skeleton';
+const RecipesList = React.lazy(() =>
+  import('@/components/Recipes/RecipesList')
+);
+export default async function Home({ searchParams }) {
   const query = (await searchParams)?.query;
 
   let response;
@@ -20,12 +23,14 @@ export default async function Home({searchParams}) {
   return (
     <div>
       <Hero />
-      <RecipesList
-        recipes={topRecipes}
-        query={query}
-        all_recipes={false}
-        heading='Top Recipes'
-      />
+      <Suspense fallback={<Skeleton />}>
+        <RecipesList
+          recipes={topRecipes}
+          query={query}
+          all_recipes={false}
+          heading='Top Recipes'
+        />
+      </Suspense>
     </div>
   );
 }

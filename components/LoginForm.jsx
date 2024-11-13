@@ -4,46 +4,45 @@ import { useState } from 'react';
 import InputField from './InputField';
 import Link from 'next/link';
 import { getUser } from '@/utils/auth-user';
-
+import toast from 'react-hot-toast';
 export default function LoginForm() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
   const router = useRouter();
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setCredentials((prev) => ({ ...prev, [name]: value }));
-};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
+  };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const { email, password } = credentials;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = credentials;
 
-  if (!email || !password) {
-    setError('Both email and password are required');
-    return;
-  }
-
-  try {
-    const user = await getUser(email, password);
-    if (user) {
-      
-      localStorage.setItem('users', JSON.stringify(user));
-
-      setCredentials({ email: '', password: '' });
-      setError('');
-      setUser(user); 
-
-      
-      router.push('/'); 
-    } else {
-      setError('Invalid email or password');
+    if (!email || !password) {
+      setError('Both email and password are required');
+      return;
     }
-  } catch (err) {
-    setError(err.message || 'An error occurred');
-  }
-};
+
+    try {
+      const user = await getUser(email, password);
+      if (user) {
+        localStorage.setItem('users', JSON.stringify(user));
+
+        setCredentials({ email: '', password: '' });
+        setError('');
+        setUser(user);
+        toast.success('Login Successful');
+        router.push('/');
+      } else {
+        toast.error('Invalid email or password');
+        setError('Invalid email or password');
+      }
+    } catch (err) {
+      setError('An error occurred');
+    }
+  };
   return (
     <form
       className='text-yellow-900 space-y-6'
