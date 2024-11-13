@@ -1,120 +1,100 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createUserInDb } from '@/lib/utils';
+import InputField from './InputField';
+import Link from 'next/link';
+import { createUser, getUser } from '@/utils/auth-user';
 
 export default function SignupForm() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    password: '',
+    cart: [], // Initialize cart here as part of formData
+  });
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
+    const { name, phone, email, password, cart } = formData;
 
     try {
-      // create a new user
-      const newUser = await createUserInDb({ name, email, phone, password });
-
-      if (newUser) {
-        // Store user in localStorage and redirect if successfully created
-        localStorage.setItem('user', JSON.stringify(newUser)); 
-        setLoading(false);
-        router.push('/Login');
+      const userExists = await getUser(email, password);
+      if (userExists) {
+        setError('User with this email already exists.');
+        return;
       }
+
+      await createUser({ name, phone, email, password, cart });
+
+   
+      localStorage.setItem('users', JSON.stringify(formData));
+
+      router.push('/login');
     } catch (err) {
-      setLoading(false);
-      setError(err.message);
+      setError(err.message || 'An error occurred');
     }
   };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <div className='mb-4'>
-        <label
-          htmlFor='name'
-          className='block text-sm font-medium text-gray-700'
-        >
-          Name
-        </label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className='w-full mt-1 p-2 border border-yellow-300 rounded-md'
-          placeholder='Enter your full name'
-          required
-        />
-      </div>
-      <div className='mb-4'>
-        <label
-          htmlFor='email'
-          className='block text-sm font-medium text-gray-700'
-        >
-          Email
-        </label>
-        <input
-          type='email'
-          id='email'
-          name='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className='w-full mt-1 p-2 border border-yellow-300 rounded-md'
-          placeholder='Enter your email'
-          required
-        />
-      </div>
-      <div className='mb-4'>
-        <label
-          htmlFor='phone'
-          className='block text-sm font-medium text-gray-700'
-        >
-          Phone
-        </label>
-        <input
-          type='text'
-          id='phone'
-          name='phone'
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className='w-full mt-1 p-2 border border-yellow-300 rounded-md'
-          placeholder='Enter your phone number'
-          required
-        />
-      </div>
-      <div className='mb-4'>
-        <label
-          htmlFor='password'
-          className='block text-sm font-medium text-gray-700'
-        >
-          Password
-        </label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className='w-full mt-1 p-2 border border-yellow-300 rounded-md'
-          placeholder='Enter your password'
-          required
-        />
-      </div>
-      {error && <div className='text-red-500 text-sm mb-3'>{error}</div>}
+    <form
+      className='text-yellow-900 space-y-6'
+      onSubmit={handleSubmit}
+    >
+      <InputField
+        label='Name'
+        id='name'
+        type='text'
+        placeholder='Your full name'
+        value={formData.name}
+        onChange={handleChange}
+      />
+      <InputField
+        label='Phone'
+        id='phone'
+        type='tel'
+        placeholder='Your phone number'
+        value={formData.phone}
+        onChange={handleChange}
+      />
+      <InputField
+        label='Email'
+        id='email'
+        type='email'
+        placeholder='Enter your email'
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <InputField
+        label='Password'
+        id='password'
+        type='password'
+        placeholder='Enter your password'
+        value={formData.password}
+        onChange={handleChange}
+      />
+      {error && <div className='text-red-500 text-xs'>{error}</div>}
       <button
         type='submit'
-        className='w-full py-2 px-4 bg-yellow-300 text-yellow-900 rounded-md hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-700'
-        disabled={loading}
+        className='w-full py-3 rounded-full bg-yellow-300 text-yellow-900 font-semibold hover:bg-yellow-100 active:bg-yellow-400 focus:ring-2 focus:ring-yellow-200 transition'
       >
-        {loading ? 'Signing up...' : 'Sign Up'}
+        Sign up
       </button>
+      <div className='mt-4 text-center text-sm text-yellow-900'>
+        Already have an account?
+        <Link
+          href='/login'
+          className='underline pl-1 text-yellow-500 hover:text-yellow-700'
+        >
+          Login
+        </Link>
+      </div>
     </form>
   );
 }

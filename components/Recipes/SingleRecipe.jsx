@@ -5,14 +5,15 @@ const SingleRecipe = ({ data, onClose }) => {
   const handleAddToCart = () => {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
     const updatedCart = [...currentCart, data];
+
     localStorage.setItem('cart', JSON.stringify(updatedCart));
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('users'));
     if (user) {
       const userCart = user.cart || [];
       user.cart = [...userCart, data];
 
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('users', JSON.stringify(user));
     }
     onClose(false);
   };
