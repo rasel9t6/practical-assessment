@@ -1,4 +1,4 @@
-export const getUsersFromLocalStorage = () => {
+export const getUsersFromLocalStorage = async () => {
   const users = localStorage.getItem('users');
   return users ? JSON.parse(users) : [];
 };
@@ -26,7 +26,6 @@ export const createUser = async ({ name, email, phone, password, cart }) => {
     throw new Error('Email already in use. Please use a different email.');
   }
 
-  // Create a new user object with a dynamically generated user ID
   const newUser = {
     id: crypto.randomUUID(),
     name,

@@ -5,22 +5,20 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState, useRef } from 'react';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
   const toggleNavRef = useRef(null);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const storedUser = getUsersFromLocalStorage();
-    setUser(storedUser);
+    setUser(storedUser); 
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('users');
-    setUser(null);
-    router.refresh()
+    setUser(null); 
   };
 
-  // Function to close navbar
   const closeNavbar = () => {
     if (toggleNavRef.current) {
       toggleNavRef.current.checked = false;
@@ -145,3 +143,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+ 

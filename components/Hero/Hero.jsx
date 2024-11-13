@@ -15,9 +15,9 @@ const Hero = () => {
                   src='/images/home/banner.png'
                   className='relative w-full'
                   alt='food illustration'
-                  loading='lazy'
                   width={1280}
                   height={720}
+                  priority
                 />
               </div>
             </div>

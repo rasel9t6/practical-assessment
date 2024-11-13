@@ -9,6 +9,7 @@ const SingleRecipe = ({ data, onClose }) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
 
     const user = JSON.parse(localStorage.getItem('users'));
+    console.log(user)
     if (user) {
       const userCart = user.cart || [];
       user.cart = [...userCart, data];
