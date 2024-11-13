@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 const SingleRecipe = ({ data, onClose }) => {
   const handleAddToCart = () => {
-    const currentUser = getUsersFromLocalStorage(); 
+    const currentUser = getUsersFromLocalStorage();
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (currentUser && currentUser.cart) {
@@ -19,9 +19,9 @@ const SingleRecipe = ({ data, onClose }) => {
           userCart.every((userItem) => userItem.idMeal !== item.idMeal)
         ),
       ];
-   if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
-     mergedCart.push(data);
-   }
+      if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
+        mergedCart.push(data);
+      }
       currentUser.cart = mergedCart;
       saveUsersToLocalStorage(currentUser);
 
@@ -42,8 +42,8 @@ const SingleRecipe = ({ data, onClose }) => {
     <div className='flex flex-col gap-5'>
       <div className='flex justify-end'>
         <button
+          aria-label='Close'
           onClick={() => onClose(false)}
-          className=''
         >
           <X className='size-8 border border-red-500  rounded-full p-1' />
         </button>

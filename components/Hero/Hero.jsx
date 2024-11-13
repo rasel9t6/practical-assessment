@@ -31,6 +31,7 @@ const Hero = () => {
               />
             </div>
             <Link
+              aria-label='Go to all recipes page'
               href='/all-recipes'
               className='absolute hidden md:block text-center text-white text-sm font-semibold px-2 py-2.5 border-2 border-yellow-500 rounded-full left-1/4 bottom-3 md:bottom-12 md:left-1/4 lg:font-bold lg:px-8 lg:py-3 lg:bottom-36 transition-all hover:bg-yellow-500'
             >

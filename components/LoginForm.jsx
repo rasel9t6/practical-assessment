@@ -66,6 +66,7 @@ export default function LoginForm() {
       />
       {error && <div className='text-red-500 text-sm mb-3'>{error}</div>}
       <button
+        aria-label='Submit login form'
         type='submit'
         className='w-full py-3 rounded-full bg-yellow-300 text-yellow-900 font-semibold hover:bg-yellow-100 active:bg-yellow-400 focus:ring-2 focus:ring-yellow-200 transition'
       >
@@ -74,6 +75,7 @@ export default function LoginForm() {
       <div className='mt-4 text-center text-sm text-yellow-900'>
         Already have an account?
         <Link
+          aria-label='Go to sign up page'
           href='/signup'
           className='underline pl-1 text-yellow-500 hover:text-yellow-700'
         >
