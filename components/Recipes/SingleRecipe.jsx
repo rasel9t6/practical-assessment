@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 const SingleRecipe = ({ data, onClose }) => {
   const handleAddToCart = () => {
-    const currentUser = getUsersFromLocalStorage(); 
+    const currentUser = getUsersFromLocalStorage();
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
 
     if (currentUser && currentUser.cart) {
@@ -19,9 +19,9 @@ const SingleRecipe = ({ data, onClose }) => {
           userCart.every((userItem) => userItem.idMeal !== item.idMeal)
         ),
       ];
-   if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
-     mergedCart.push(data);
-   }
+      if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
+        mergedCart.push(data);
+      }
       currentUser.cart = mergedCart;
       saveUsersToLocalStorage(currentUser);
 
@@ -42,8 +42,8 @@ const SingleRecipe = ({ data, onClose }) => {
     <div className='flex flex-col gap-5'>
       <div className='flex justify-end'>
         <button
+          title='Close'
           onClick={() => onClose(false)}
-          className=''
         >
           <X className='size-8 border border-red-500  rounded-full p-1' />
         </button>
@@ -59,6 +59,8 @@ const SingleRecipe = ({ data, onClose }) => {
       <h2 className='text-2xl font-semibold'>{data.strMeal}</h2>
       <div className='flex justify-center'>
         <button
+          type='button'
+          title='Add recipe to your cart'
           onClick={handleAddToCart}
           className='w-full font-bold py-3 px-6 text-center rounded-full transition bg-yellow-300 hover:bg-yellow-100 active:bg-yellow-400 focus:bg-yellow-300 sm:w-max'
         >

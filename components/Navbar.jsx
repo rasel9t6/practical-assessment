@@ -4,27 +4,25 @@ import Link from 'next/link';
 import React, { useEffect, useState, useRef } from 'react';
 
 const Navbar = () => {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const toggleNavRef = useRef(null);
 
+  useEffect(() => {
+    const getUser = () => {
+      const usersData = localStorage.getItem('users');
+      if (usersData) {
+        return JSON.parse(usersData);
+      }
+      return null;
+    };
 
-useEffect(() => {
-  const getUser = () => {
-    const usersData = localStorage.getItem('users');
-    if (usersData) {
-      return JSON.parse(usersData); 
-    }
-    return null; 
-  };
-
-  const storedUser = getUser();
-  setUser(storedUser); 
-
-}, []);
+    const storedUser = getUser();
+    setUser(storedUser);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('users');
-    setUser(null); 
+    setUser(null);
   };
 
   const closeNavbar = () => {
@@ -47,7 +45,8 @@ useEffect(() => {
           <div className='w-full px-6 flex justify-between lg:w-max md:px-0 z-30'>
             <Link
               href='/'
-              aria-label='logo'
+              aria-label='Tailus Feedus home page'
+              title='Go to home page'
               className='flex space-x-2 items-center'
               onClick={closeNavbar}
             >
@@ -87,6 +86,7 @@ useEffect(() => {
                 <li>
                   <Link
                     href='/all-recipes'
+                    title='All Recipes'
                     className='block md:px-4 transition hover:text-yellow-700'
                     onClick={closeNavbar}
                   >
@@ -96,6 +96,7 @@ useEffect(() => {
                 <li>
                   <Link
                     href='/cart'
+                    title='Cart list'
                     className='block md:px-4 transition hover:text-yellow-700'
                     onClick={closeNavbar}
                   >
@@ -151,4 +152,3 @@ useEffect(() => {
 };
 
 export default Navbar;
- 

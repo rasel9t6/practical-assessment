@@ -4,6 +4,7 @@ import Image from 'next/image';
 const RecipeCard = ({ recipe, onClick }) => {
   return (
     <div
+      title={recipe?.strMeal}
       onClick={onClick}
       className='group space-y-6 border border-gray-100  rounded-3xl bg-white  px-4 py-4 text-center shadow hover:cursor-pointer hover:shadow-xl transition duration-200 shadow-gray-600/10'
     >
