@@ -46,6 +46,7 @@ const Navbar = () => {
             <Link
               href='/'
               aria-label='Tailus Feedus home page'
+              title='Go to home page'
               className='flex space-x-2 items-center'
               onClick={closeNavbar}
             >
@@ -86,6 +87,7 @@ const Navbar = () => {
                   <Link
                     aria-label='All recipes'
                     href='/all-recipes'
+                    title='All Recipes'
                     className='block md:px-4 transition hover:text-yellow-700'
                     onClick={closeNavbar}
                   >
@@ -96,6 +98,7 @@ const Navbar = () => {
                   <Link
                     aria-label='Go to cart page'
                     href='/cart'
+                    title='Cart list'
                     className='block md:px-4 transition hover:text-yellow-700'
                     onClick={closeNavbar}
                   >

@@ -34,12 +34,12 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 - Created a new page to display all available recipes from the API.
 
 ### 5. **Bug Fixes:**
-
-- Fixed the **unique map key error** in the recipe list.
-- Resolved issues with the **modal close function** not working properly.
-- Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
-- Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
-- Addressed **Next.js config images.remotePatterns warning**.
+   - Fixed the **unique map key error** in the recipe list.
+   - Resolved issues with the **modal close function** not working properly.
+   - Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
+   - Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
+   - Addressed **Next.js config images.remotePatterns warning**.
+   - Fixed **aria-attribute**.
 
 ### 6. **Design and Accessibility Improvements:**
 
