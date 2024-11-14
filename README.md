@@ -54,7 +54,7 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 ```plaintext
 BASE_URL = 'https://www.themealdb.com/api/json/v1/1'
 NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000"
-
+```
 ### 8. **Notification**
 
 - Added an **React hot toast** for notify user interaction.
