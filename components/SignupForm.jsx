@@ -91,7 +91,7 @@ export default function SignupForm() {
       <div className='mt-4 text-center text-sm text-yellow-900'>
         Already have an account?
         <Link
-          aria-label='Go to login page'
+          aria-label='Login'
           href='/login'
           className='underline pl-1 text-yellow-500 hover:text-yellow-700'
         >

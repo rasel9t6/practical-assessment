@@ -45,7 +45,7 @@ const Navbar = () => {
           <div className='w-full px-6 flex justify-between lg:w-max md:px-0 z-30'>
             <Link
               href='/'
-              aria-label='Go to home page'
+              aria-label='Tailus Feedus home page'
               className='flex space-x-2 items-center'
               onClick={closeNavbar}
             >
@@ -84,7 +84,7 @@ const Navbar = () => {
               <ul className='tracking-wide font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full'>
                 <li>
                   <Link
-                    aria-label='Go to all recipes page'
+                    aria-label='All recipes'
                     href='/all-recipes'
                     className='block md:px-4 transition hover:text-yellow-700'
                     onClick={closeNavbar}
