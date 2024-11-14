@@ -34,6 +34,7 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
    - Resolved issues with the **toggle navbar hamburger button** not closing after navigation.
    - Fixed deprecated tags in the **modal component** and passed the `SingleRecipe` as a child component.
    - Addressed **Next.js config images.remotePatterns warning**.
+   - Fixed **aria-attribute**.
 
 ### 6. **Design and Accessibility Improvements:**
    - Designed a **Hero Section Banner** with a call-to-action button.
