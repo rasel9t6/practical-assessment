@@ -19,6 +19,9 @@ This is a Recipe App that integrates with the free MealDB API to fetch recipe da
 ### 1. **API Integration:**
 
 - Converted the entire HTTP API kit into Next.js API routes for seamless server-side integration.
+- Reduced code by 100 lines by optimizing functions and logic.
+- Removed third-party libraries such as TanStack Query, resulting in a leaner setup.
+- Replaced useState and useEffect with a more efficient state management approach.
 
 ### 2. **Add to Cart Functionality:**
 
@@ -70,7 +73,7 @@ NEXT_PUBLIC_API_BASE_URL = "http://localhost:3000"
 
 ## Time Estimate
 
-- Total time spent on this assessment: **25+ hours** (adjust based on actual time).
+- Total time spent on this assessment: **28+ hours**.
 
 ---
 

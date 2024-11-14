@@ -8,36 +8,43 @@ import toast from 'react-hot-toast';
 
 const SingleRecipe = ({ data, onClose }) => {
   const handleAddToCart = () => {
-    const currentUser = getUsersFromLocalStorage(); 
-    const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+     const currentUser = getUsersFromLocalStorage();
+  const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    if (currentUser && currentUser.cart) {
-      const userCart = currentUser.cart || [];
+  if (currentUser && currentUser.cart) {
+    const userCart = currentUser.cart || [];
+
+    // Check if the item is already in the user's cart
+    if (userCart.some((item) => item.idMeal === data.idMeal)) {
+      toast.warn('Recipe already in your account cart');
+    } else {
       const mergedCart = [
         ...userCart,
         ...currentCart.filter((item) =>
           userCart.every((userItem) => userItem.idMeal !== item.idMeal)
         ),
       ];
-   if (!mergedCart.some((item) => item.idMeal === data.idMeal)) {
-     mergedCart.push(data);
-   }
+      mergedCart.push(data); 
+
       currentUser.cart = mergedCart;
       saveUsersToLocalStorage(currentUser);
 
       // Clear the guest cart after merging
       localStorage.removeItem('cart');
       toast.success('Recipe added to your account cart');
-    } else {
-      // User not logged in; only work with the guest cart in localStorage
-      if (!currentCart.some((item) => item.idMeal === data.idMeal)) {
-        localStorage.setItem('cart', JSON.stringify([...currentCart, data]));
-        toast.success('Recipe added to guest cart');
-      }
     }
+  } else {
+    if (currentCart.some((item) => item.idMeal === data.idMeal)) {
+      toast.warn('Recipe already in guest cart');
+    } else {
+      localStorage.setItem('cart', JSON.stringify([...currentCart, data]));
+      toast.success('Recipe added to guest cart');
+    }
+  }
 
-    onClose(false);
-  };
+  onClose(false);
+};
+ 
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex justify-end'>
